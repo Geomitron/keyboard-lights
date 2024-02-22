@@ -1,0 +1,23 @@
+{
+  "name": "keyboard-lights",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx ./src/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.10.6",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "cue-sdk": "^4.0.84",
+    "lodash": "^4.17.21",
+    "node-global-key-listener": "^0.1.1"
+  }
+}
