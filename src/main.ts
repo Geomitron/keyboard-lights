@@ -1,4 +1,4 @@
-import { CorsairConnect, CorsairDeviceType, CorsairDisconnect, CorsairErrorToString, CorsairGetDevices, CorsairLedColor, CorsairLedId_Keyboard, CorsairSessionState, CorsairSessionStateToString, CorsairSetLedColors, CorsairSetLedColorsBuffer, CorsairSetLedColorsFlushBufferAsync, CorsairUnsubscribeFromEvents } from 'cue-sdk'
+import { CorsairConnect, CorsairDeviceType, CorsairDisconnect, CorsairErrorToString, CorsairGetDevices, CorsairLedColor, CorsairLedId_Keyboard, CorsairSessionState, CorsairSessionStateToString, CorsairSetLedColors, CorsairUnsubscribeFromEvents } from 'cue-sdk'
 import _ from 'lodash'
 import { GlobalKeyboardListener, IGlobalKey, IGlobalKeyDownMap } from 'node-global-key-listener'
 import { inspect } from 'util'
@@ -236,6 +236,13 @@ async function main() {
   }
 
   deviceId = keyboardDevices.data[0].id
+
+  const allKeyIds: number[] = []
+  for (const key in CorsairLedId_Keyboard) {
+    allKeyIds.push(Number(CorsairLedId_Keyboard[key]))
+  }
+  const turnedOffLedGroup = allKeyIds.map(id => ({ id, r: 0, g: 0, b: 0, a: 255 }))
+  CorsairSetLedColors(deviceId, turnedOffLedGroup)
 
   let lastPress: IGlobalKey | null = null
   keyListener.addListener((event, isDown) => {
